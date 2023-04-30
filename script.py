@@ -160,7 +160,7 @@ def update_sheet():
             # Update the cell representing the user's submission status in the LeetCode 75 worksheet
             if row_index := problem_exists(leetcode_worksheet, problem_title):
                 update_accepted(leetcode_worksheet, row_index, user)
-            time.sleep(5)
+            time.sleep(10)
     latest_updated_time = datetime.fromtimestamp(time.time()-600)
     update_cell(leetcode_worksheet, 25, 22, latest_updated_time.timestamp())
     print('Done');
