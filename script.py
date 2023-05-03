@@ -97,7 +97,7 @@ medium_worksheet = spreadsheet.worksheet(medium_worksheet_name)
 hard_worksheet = spreadsheet.worksheet(hard_worksheet_name)
 leetcode_worksheet = spreadsheet.worksheet(leetcode_worksheet_name)
 
-latest_updated_time = datetime.fromtimestamp(float(leetcode_worksheet.cell(31, 22).value))
+latest_updated_time = datetime.fromtimestamp(float(leetcode_worksheet.cell(25, 30).value))
 
 
 def update_sheet():
@@ -162,7 +162,7 @@ def update_sheet():
                 update_accepted(leetcode_worksheet, row_index, user)
             time.sleep(10)
     latest_updated_time = datetime.fromtimestamp(time.time()-600)
-    update_cell(leetcode_worksheet, 31, 22, latest_updated_time.timestamp())
+    update_cell(leetcode_worksheet, 25, 30, latest_updated_time.timestamp())
     print('Done');
 
 
