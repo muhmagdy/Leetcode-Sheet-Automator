@@ -99,6 +99,7 @@ leetcode_worksheet = spreadsheet.worksheet(leetcode_worksheet_name)
 
 latest_updated_time = datetime.fromtimestamp(float(leetcode_worksheet.cell(25, 30).value))
 
+new_update_time = datetime.fromtimestamp(time.time())
 
 def update_sheet():
     global latest_updated_time
@@ -162,7 +163,7 @@ def update_sheet():
                 update_accepted(leetcode_worksheet, row_index, user)
             time.sleep(10)
     latest_updated_time = datetime.fromtimestamp(time.time()-600)
-    update_cell(leetcode_worksheet, 25, 30, latest_updated_time.timestamp())
+    update_cell(leetcode_worksheet, 25, 30, new_update_time.timestamp())
     print('Done');
 
 
