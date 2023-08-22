@@ -1,3 +1,4 @@
+from types import NoneType
 import gspread
 import requests
 from datetime import datetime
@@ -101,6 +102,8 @@ latest_updated_time = datetime.fromtimestamp(float(leetcode_worksheet.cell(25, 3
 
 new_update_time = datetime.fromtimestamp(time.time())
 
+print(f"Last Updated Time = {latest_updated_time}, Now = {new_update_time}")
+
 def update_sheet():
     global latest_updated_time
     # Loop through the users and retrieve their submissions
@@ -117,6 +120,11 @@ def update_sheet():
         response = requests.post(leetcode_url, json=json_data)
         accepted_problems = response.json()['data']['recentAcSubmissionList']
 
+        if type(accepted_problems) == NoneType:
+            continue
+        
+        print(f"[{user}]")
+        
         # Loop through the submissions and update the corresponding cells in the worksheets
         for problem in accepted_problems:
             problem_id = problem['id']
@@ -161,7 +169,7 @@ def update_sheet():
             # Update the cell representing the user's submission status in the LeetCode 75 worksheet
             if row_index := problem_exists(leetcode_worksheet, problem_title):
                 update_accepted(leetcode_worksheet, row_index, user)
-            time.sleep(10)
+            time.sleep(5)
     latest_updated_time = datetime.fromtimestamp(time.time()-600)
     update_cell(leetcode_worksheet, 25, 30, new_update_time.timestamp())
     print('Done');
